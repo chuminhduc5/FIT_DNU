@@ -1,4 +1,5 @@
 import 'package:fit_dnu/core/config/theme/app_theme.dart';
+import 'package:fit_dnu/feature/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'feature/authentication/presentation/screens/sign_in_screen.dart';

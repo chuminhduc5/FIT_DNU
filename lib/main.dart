@@ -1,11 +1,18 @@
+import 'dart:async';
+
 import 'package:fit_dnu/core/config/theme/app_theme.dart';
 import 'package:fit_dnu/feature/home/presentation/screens/home_screen.dart';
+import 'package:fit_dnu/service_locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'feature/authentication/presentation/screens/sign_in_screen.dart';
 import 'feature/profile/presentation/screens/profile_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env');
+  setupServiceLocator();
   runApp(const MyApp());
 }
 
@@ -16,8 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ProfileScreen(),
-      theme: AppTheme.appTheme,
+      home: SignInScreen(),
     );
   }
 }

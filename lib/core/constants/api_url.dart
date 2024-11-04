@@ -1,4 +1,8 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class ApiUrl {
-  static const baseURL = '';
-  static const apiV = 'api/v1';
+  static final String baseUrl = dotenv.env['API_URL'] ?? '';
+
+  // Todo: Config API Auth
+  static final String signIn = '';
 }

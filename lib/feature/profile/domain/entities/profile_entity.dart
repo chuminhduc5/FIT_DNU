@@ -1,16 +1,47 @@
 import 'package:equatable/equatable.dart';
 
-class ProfileModel extends Equatable {
-  int id;
-  String studentCode;
+class ProfileEntity extends Equatable {
+  final int id;
+  final String studentCode;
+  final int userId;
+  final String fullName;
+  final DateTime birthDate;
+  final String gender;
+  final String nationality;
+  final String hometown;
+  final String address;
+  final String phoneNumber;
+  final String email;
+  final String major;
 
-  ProfileModel({
+  ProfileEntity({
     required this.id,
     required this.studentCode,
+    required this.userId,
+    required this.fullName,
+    required this.birthDate,
+    required this.gender,
+    required this.nationality,
+    required this.hometown,
+    required this.address,
+    required this.phoneNumber,
+    required this.email,
+    required this.major,
   });
 
   @override
   List<Object?> get props => [
-    id, studentCode
+    id,
+    studentCode,
+    userId,
+    fullName,
+    birthDate,
+    gender,
+    nationality,
+    hometown,
+    address,
+    phoneNumber,
+    email,
+    major,
   ];
 }

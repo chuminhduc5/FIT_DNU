@@ -1,32 +1,89 @@
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'login_widget.dart' show LoginWidget;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
-class LoginModel extends FlutterFlowModel<LoginWidget> {
-  ///  State fields for stateful widgets in this page.
-
-  // State field(s) for TextFeild widget.
-  FocusNode? textFeildFocusNode;
-  TextEditingController? textFeildTextController;
-  String? Function(BuildContext, String?)? textFeildTextControllerValidator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
+class LoginWidget extends StatefulWidget {
+  const LoginWidget({super.key});
 
   @override
-  void initState(BuildContext context) {}
+  _LoginWidgetState createState() => _LoginWidgetState();
+}
+
+class _LoginWidgetState extends State<LoginWidget> {
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  late FocusNode _usernameFocusNode;
+  late FocusNode _passwordFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _usernameFocusNode = FocusNode();
+    _passwordFocusNode = FocusNode();
+  }
 
   @override
   void dispose() {
-    textFeildFocusNode?.dispose();
-    textFeildTextController?.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    _usernameFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
 
-    textFieldFocusNode?.dispose();
-    textController2?.dispose();
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        _usernameFocusNode.unfocus();
+        _passwordFocusNode.unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextField(
+                  controller: _usernameController,
+                  focusNode: _usernameFocusNode,
+                  decoration: InputDecoration(
+                    hintText: 'Username',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                TextField(
+                  controller: _passwordController,
+                  focusNode: _passwordFocusNode,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: () {
+                    // Perform login logic here
+                    print('Login button pressed');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFEF7E39),
+                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                    textStyle: TextStyle(fontSize: 16),
+                  ),
+                  child: Text('Login'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

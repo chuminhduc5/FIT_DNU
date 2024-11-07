@@ -1,122 +1,145 @@
+import 'package:fit_dnu/core/common/helper/navigation/app_navigation.dart';
+import 'package:fit_dnu/core/config/theme/app_colors.dart';
+import 'package:fit_dnu/feature/home/widgets/schedule_widget.dart';
+import 'package:fit_dnu/feature/home/widgets/student_information_widget.dart';
+import 'package:fit_dnu/feature/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../widgets/feature_card_widget.dart';
+
 class HomeScreen extends StatefulWidget {
+  final VoidCallback onTap;
+
+  const HomeScreen({super.key, required this.onTap});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String dropdownValue = 'Trang Chủ';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFEFEFEF),
       appBar: AppBar(
-        backgroundColor: Colors.orange,
-      ),
-      body: _buildHome(context),
-    );
-  }
-}
-
-  Widget _buildHome(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          children: [
-            Text(
-              'ĐẠI HỌC ĐẠI NAM',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Học để thay đổi',
-              style: TextStyle(fontSize: 14),
-            ),
-          ],
+        title: const Text(
+          'ĐẠI HỌC ĐẠI NAM',
+          style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: AppColors.textWhite),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.orange,
+        backgroundColor: AppColors.bgOrange,
       ),
-      body: Column(
-        children: [
-          // Menu Section
-          Container(
-            color: Colors.orange,
-            padding: EdgeInsets.symmetric(vertical: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MenuIcon(title: 'TRANG CHỦ', icon: Icons.home),
-                MenuIcon(title: 'CHƯƠNG TRÌNH ĐÀO TẠO', icon: Icons.book),
-                MenuIcon(title: 'ĐĂNG KÍ', icon: Icons.app_registration),
-                MenuIcon(title: 'SINH VIÊN', icon: Icons.person),
-                MenuIcon(title: 'ĐÁNH GIÁ', icon: Icons.star),
-                MenuIcon(title: 'THÔNG TIN TÀI CHÍNH', icon: Icons.account_balance),
-                MenuIcon(title: 'THÔNG TIN', icon: Icons.info),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            InkWell(
+              onTap: widget.onTap,
+              child: const StudentInformationWidget(),
             ),
-          ),
-          // Welcome Text
-          Padding(
-            padding: EdgeInsets.all(16),
-            child: Text(
-              'Chào mừng quý vị đến với Cổng thông tin của trường',
-              style: TextStyle(fontSize: 16),
+            const SizedBox(
+              height: 5,
             ),
-          ),
-          // News Section
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(16),
-              alignment: Alignment.topLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'TIN TỨC MỚI NHẤT',
+                    'Các cức năng phổ biến',
                     style: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textBlack,
+                    ),
                   ),
-                  SizedBox(height: 10),
                   Text(
-                    'Xem tất cả',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                  // Placeholder for News Content
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        'No News Available',
-                        style: TextStyle(color: Colors.grey),
-                      ),
+                    'Thay đổi',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: AppColors.textBlue,
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.textBlue,
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-class MenuIcon extends StatelessWidget {
-  final String title;
-  final IconData icon;
-
-  const MenuIcon({required this.title, required this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(icon, color: Colors.white),
-        SizedBox(height: 4),
-        Text(
-          title,
-          style: TextStyle(color: Colors.white, fontSize: 12),
-          textAlign: TextAlign.center,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: GridView.count(
+                crossAxisCount: 3,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: const [
+                  FeatureCardWidget(
+                    icon: Icons.assignment,
+                    label: 'Dịch vụ một cửa',
+                    color: Colors.blue,
+                  ),
+                  FeatureCardWidget(
+                    icon: Icons.schedule,
+                    label: 'Thời khoá biểu',
+                    color: Colors.orange,
+                  ),
+                  FeatureCardWidget(
+                    icon: Icons.class_,
+                    label: 'Lớp tín chỉ',
+                    color: Colors.purple,
+                  ),
+                  FeatureCardWidget(
+                    icon: Icons.grade,
+                    label: 'Kết quả học tập',
+                    color: Colors.red,
+                  ),
+                  FeatureCardWidget(
+                    icon: Icons.qr_code,
+                    label: 'Quét mã QR',
+                    color: Colors.green,
+                  ),
+                  FeatureCardWidget(
+                    icon: Icons.more_horiz,
+                    label: 'Tiện ích khác',
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: ScheduleWidget(),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Tin nổi bật',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textBlack,
+                    ),
+                  ),
+                  Text(
+                    'Xem thêm',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: AppColors.textBlue,
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.textBlue,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

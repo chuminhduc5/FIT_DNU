@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ScoreScreen extends StatefulWidget {
   const ScoreScreen({Key? key}) : super(key: key);
@@ -58,7 +57,8 @@ class _ScoreScreenState extends State<ScoreScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Tổng quan', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text('Tổng quan',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,7 +87,8 @@ class _ScoreScreenState extends State<ScoreScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Tín chỉ đã hoàn thành', style: TextStyle(color: Colors.grey, fontSize: 16)),
+        Text('Tín chỉ đã hoàn thành',
+            style: TextStyle(color: Colors.grey, fontSize: 16)),
         Text('75/150', style: TextStyle(fontSize: 24)),
       ],
     );
@@ -102,7 +103,8 @@ class _ScoreScreenState extends State<ScoreScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Kết quả học kỳ gần nhất', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text('Kết quả học kỳ gần nhất',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 16),
             _buildSemesterRow('Học kỳ:', 'Học kỳ 1, 2023-2024'),
             _buildSemesterRow('GPA học kỳ:', '3.80'),
@@ -132,7 +134,8 @@ class _ScoreScreenState extends State<ScoreScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Chi tiết môn học', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text('Chi tiết môn học',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 16),
             _buildSubjectRow('Lập trình Web', '3 tín chỉ', 'A'),
             _buildSubjectRow('Cơ sở dữ liệu', '4 tín chỉ', 'A+'),

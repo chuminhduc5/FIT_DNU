@@ -2,7 +2,7 @@ class SignInReqParams {
   final String email;
   final String password;
 
-  const SignInReqParams({
+  SignInReqParams({
     required this.email,
     required this.password,
   });

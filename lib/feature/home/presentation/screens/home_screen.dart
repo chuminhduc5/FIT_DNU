@@ -1,5 +1,6 @@
 import 'package:fit_dnu/core/common/helper/navigation/app_navigation.dart';
 import 'package:fit_dnu/core/config/theme/app_colors.dart';
+import 'package:fit_dnu/feature/home/presentation/screens/schedule_screen.dart';
 import 'package:fit_dnu/feature/home/widgets/schedule_widget.dart';
 import 'package:fit_dnu/feature/home/widgets/student_information_widget.dart';
 import 'package:fit_dnu/feature/profile/presentation/screens/profile_screen.dart';
@@ -74,16 +75,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisSpacing: 10,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [
+                children: [
                   FeatureCardWidget(
                     icon: Icons.assignment,
                     label: 'Dịch vụ một cửa',
                     color: Colors.blue,
                   ),
-                  FeatureCardWidget(
-                    icon: Icons.schedule,
-                    label: 'Thời khoá biểu',
-                    color: Colors.orange,
+                  InkWell(
+                    onTap: () {
+                      AppNavigator.push(context, ScheduleScreen());
+                    },
+                    child: FeatureCardWidget(
+                      icon: Icons.schedule,
+                      label: 'Thời khoá biểu',
+                      color: Colors.orange,
+                    ),
                   ),
                   FeatureCardWidget(
                     icon: Icons.class_,

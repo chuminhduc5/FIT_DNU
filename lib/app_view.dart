@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:fit_dnu/feature/home/presentation/screens/home_screen.dart';
-import 'package:fit_dnu/feature/home/presentation/screens/util_screen.dart';
+import 'package:fit_dnu/feature/utilities/presentation/screens/util_screen.dart';
 import 'package:fit_dnu/feature/notification/presentation/screens/notification_screen.dart';
 import 'package:fit_dnu/feature/profile/presentation/screens/profile_screen.dart';
 import 'package:fit_dnu/feature/score/presentation/screens/score_screen.dart';

@@ -1,5 +1,6 @@
 import 'package:fit_dnu/core/common/helper/navigation/app_navigation.dart';
 import 'package:fit_dnu/core/config/theme/app_colors.dart';
+import 'package:fit_dnu/feature/home/presentation/screens/feature_screen.dart';
 import 'package:fit_dnu/feature/home/presentation/screens/schedule_screen.dart';
 import 'package:fit_dnu/feature/home/widgets/schedule_widget.dart';
 import 'package:fit_dnu/feature/home/widgets/student_information_widget.dart';
@@ -44,10 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Các cức năng phổ biến',
                     style: TextStyle(
                       fontSize: 16,
@@ -55,15 +56,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: AppColors.textBlack,
                     ),
                   ),
-                  Text(
-                    'Thay đổi',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: AppColors.textBlue,
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.textBlue,
+                  TextButton(
+                    onPressed: () {
+                      AppNavigator.push(context, const FeatureScreen());
+                    },
+                    child: const Text(
+                      'Thay đổi',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: AppColors.textBlue,
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.textBlue,
+                      ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
@@ -76,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  FeatureCardWidget(
+                  const FeatureCardWidget(
                     icon: Icons.assignment,
                     label: 'Dịch vụ một cửa',
                     color: Colors.blue,
@@ -85,28 +91,28 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       AppNavigator.push(context, ScheduleScreen());
                     },
-                    child: FeatureCardWidget(
+                    child: const FeatureCardWidget(
                       icon: Icons.schedule,
                       label: 'Thời khoá biểu',
                       color: Colors.orange,
                     ),
                   ),
-                  FeatureCardWidget(
+                  const FeatureCardWidget(
                     icon: Icons.class_,
                     label: 'Lớp tín chỉ',
                     color: Colors.purple,
                   ),
-                  FeatureCardWidget(
+                  const FeatureCardWidget(
                     icon: Icons.grade,
                     label: 'Kết quả học tập',
                     color: Colors.red,
                   ),
-                  FeatureCardWidget(
+                  const FeatureCardWidget(
                     icon: Icons.qr_code,
                     label: 'Quét mã QR',
                     color: Colors.green,
                   ),
-                  FeatureCardWidget(
+                  const FeatureCardWidget(
                     icon: Icons.more_horiz,
                     label: 'Tiện ích khác',
                     color: Colors.grey,

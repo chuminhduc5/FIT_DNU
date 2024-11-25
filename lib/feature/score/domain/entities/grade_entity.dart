@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 class GradeEntity extends Equatable {
-  final int id;
   final String studentName;
   final String courseName;
   final String semesterName;
@@ -10,7 +9,6 @@ class GradeEntity extends Equatable {
   final DateTime gradeDate;
 
   GradeEntity({
-    required this.id,
     required this.studentName,
     required this.courseName,
     required this.semesterName,
@@ -21,12 +19,11 @@ class GradeEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    studentName,
-    courseName,
-    semesterName,
-    gradeTypeName,
-    gradeValue,
-    gradeDate,
-  ];
+        studentName,
+        courseName,
+        semesterName,
+        gradeTypeName,
+        gradeValue,
+        gradeDate,
+      ];
 }

@@ -1,13 +1,11 @@
 import 'package:fit_dnu/core/common/helper/navigation/app_navigation.dart';
 import 'package:fit_dnu/core/config/theme/app_colors.dart';
 import 'package:fit_dnu/feature/home/presentation/screens/feature_screen.dart';
-import 'package:fit_dnu/feature/home/presentation/screens/schedule_screen.dart';
-import 'package:fit_dnu/feature/home/widgets/schedule_widget.dart';
-import 'package:fit_dnu/feature/home/widgets/student_information_widget.dart';
-import 'package:fit_dnu/feature/profile/presentation/screens/profile_screen.dart';
+import 'package:fit_dnu/feature/home/presentation/widgets/feature_card_widget.dart';
+import 'package:fit_dnu/feature/home/presentation/widgets/schedule_widget.dart';
+import 'package:fit_dnu/feature/home/presentation/widgets/student_information_widget.dart';
+import 'package:fit_dnu/feature/score/presentation/screens/schedule_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../../widgets/feature_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   final VoidCallback onTap;
@@ -40,16 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: widget.onTap,
               child: const StudentInformationWidget(),
             ),
-            const SizedBox(
-              height: 5,
-            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    'Các cức năng phổ biến',
+                    'Các chức năng phổ biến',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -74,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
               child: GridView.count(
                 crossAxisCount: 3,
                 mainAxisSpacing: 10,

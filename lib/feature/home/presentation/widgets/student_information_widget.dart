@@ -7,7 +7,7 @@ class StudentInformationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+      margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -22,7 +22,6 @@ class StudentInformationWidget extends StatelessWidget {
         ],
       ),
       child: Row(
-        //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
             children: [

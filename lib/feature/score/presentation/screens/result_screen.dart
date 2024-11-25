@@ -51,7 +51,7 @@ class ResultScreen extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     LearningResultScreen(),
-                    ScoreScreen(),
+                    //ScoreScreen(),
                   ],
                 ),
               ),

@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
       child: const MaterialApp(
         initialRoute: '/',
         //onGenerateRoute: AppRoutes.generateRoute,
-        home: SignInScreen(),
+        //home: SignInScreen(),
+        home: AppView(),
         title: 'Hacom',
         debugShowCheckedModeBanner: false,
       ),

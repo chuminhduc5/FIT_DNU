@@ -29,7 +29,7 @@ class StudentInformationWidget extends StatelessWidget {
                 radius: 30, // Adjust the radius as needed
                 child: ClipOval(
                   child: Image.asset(
-                    "assets/images/dainam.jpg",
+                    "assets/images/logo_dainam.png",
                     fit: BoxFit.cover,
                     width: 80,
                     height: 80,

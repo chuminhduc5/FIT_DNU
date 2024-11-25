@@ -39,13 +39,13 @@ class _SignInScreenState extends State<SignInScreen>
     if (_formKey.currentState!.validate()) {
       print('Đã đưuọc kích hoạt');
       context.read<AuthBloc>().add(
-        AuthSignInRequest(
-          params: SignInReqParams(
-            username: username,
-            password: password,
-          ),
-        ),
-      );
+            AuthSignInRequest(
+              params: SignInReqParams(
+                username: username,
+                password: password,
+              ),
+            ),
+          );
     }
   }
 
@@ -58,14 +58,8 @@ class _SignInScreenState extends State<SignInScreen>
 
   @override
   Widget build(BuildContext context) {
-    final maxScreenHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final maxScreenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final maxScreenHeight = MediaQuery.of(context).size.height;
+    final maxScreenWidth = MediaQuery.of(context).size.width;
     final isLandscape = maxScreenWidth > maxScreenHeight;
 
     return Scaffold(
@@ -91,38 +85,38 @@ class _SignInScreenState extends State<SignInScreen>
             padding: const EdgeInsets.all(15),
             child: isLandscape
                 ? Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(top: maxScreenHeight * 0.1),
-                    child: Image.asset(
-                      "assets/images/dainam.jpg",
-                      width: 400,
-                      height: 400,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: buildForm(),
-                  ),
-                ),
-              ],
-            )
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.only(top: maxScreenHeight * 0.1),
+                          child: Image.asset(
+                            "assets/images/logo_dainam.png",
+                            width: 400,
+                            height: 400,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: buildForm(),
+                        ),
+                      ),
+                    ],
+                  )
                 : SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    child: Image.asset(
-                      "assets/images/dainam.jpg",
-                      width: 300,
-                      height: 300,
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Image.asset(
+                            "assets/images/logo_dainam.png",
+                            width: 300,
+                            height: 300,
+                          ),
+                        ),
+                        buildForm(),
+                      ],
                     ),
                   ),
-                  buildForm(),
-                ],
-              ),
-            ),
           ),
         ),
       ),
@@ -161,10 +155,7 @@ class _SignInScreenState extends State<SignInScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
+                      width: MediaQuery.of(context).size.width,
                       child: TextFieldAuthWidget(
                         controller: _usernameController,
                         hinText: 'Tài khoản',
@@ -182,10 +173,7 @@ class _SignInScreenState extends State<SignInScreen>
                     ),
                     const SizedBox(height: 25),
                     SizedBox(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
+                      width: MediaQuery.of(context).size.width,
                       child: TextFieldAuthWidget(
                         controller: _passwordController,
                         hinText: 'Mật khẩu',

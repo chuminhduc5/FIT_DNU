@@ -110,7 +110,7 @@ class _AppViewState extends State<AppView> {
       ),
       const NotificationScreen(),
       const LearningCornerScreen(),
-      ScoreScreen(),
+      //ScoreScreen(),
       const UtilScreen(),
       const ProfileScreen(),
     ];

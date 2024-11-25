@@ -1,6 +1,7 @@
 import 'package:fit_dnu/core/common/helper/navigation/app_navigation.dart';
 import 'package:fit_dnu/core/common/widgets/option/option_basic.dart';
 import 'package:fit_dnu/core/config/theme/app_colors.dart';
+import 'package:fit_dnu/feature/score/presentation/screens/instructor_evaluation_screen.dart';
 import 'package:fit_dnu/feature/score/presentation/screens/learning_result_screen.dart';
 import 'package:fit_dnu/feature/score/presentation/screens/result_screen.dart';
 import 'package:fit_dnu/feature/score/presentation/screens/schedule_screen.dart';
@@ -81,6 +82,15 @@ class _LearningCornerScreenState extends State<LearningCornerScreen> {
                     title: 'Lớp hành chính',
                     onTap: () {},
                     color: Colors.purple,
+                  ),
+                  OptionBasic(
+                    icon: Icons.rate_review,
+                    title: 'Đánh giá giảng viên',
+                    onTap: () {
+                      AppNavigator.push(
+                          context, const InstructorEvaluationScreen());
+                    },
+                    color: Colors.grey,
                   ),
                 ],
               ),

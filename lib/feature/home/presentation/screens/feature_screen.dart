@@ -1,3 +1,4 @@
+import 'package:fit_dnu/core/common/widgets/button/icon_button_basic.dart';
 import 'package:fit_dnu/core/config/theme/app_colors.dart';
 import 'package:fit_dnu/feature/home/presentation/widgets/feature_checkbox_widget.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class _FeatureScreenState extends State<FeatureScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFEFEFEF),
       appBar: AppBar(
         title: const Text(
           'FIT - DNU',
@@ -40,11 +42,11 @@ class _FeatureScreenState extends State<FeatureScreen> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: const Row(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -57,12 +59,20 @@ class _FeatureScreenState extends State<FeatureScreen> {
                       ),
                       Text('Chọn chức năng quan trọng nhất'),
                     ],
+                  ),
+                  IconButtonBasic(
+                    onPressed: () {},
+                    title: 'Lưu',
+                    color: AppColors.textGrey,
+                    icon: Icons.save_outlined,
+                    iconColor: AppColors.textGrey,
+                    bgColor: AppColors.greyLight,
+                    distance: 5,
                   )
                 ],
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
                   FeatureCheckboxWidget(

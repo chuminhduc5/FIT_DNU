@@ -1,6 +1,7 @@
 import 'package:fit_dnu/core/common/helper/navigation/app_navigation.dart';
 import 'package:fit_dnu/core/common/widgets/option/option_basic.dart';
 import 'package:fit_dnu/core/config/theme/app_colors.dart';
+import 'package:fit_dnu/feature/utilities/presentation/screens/dnu_news_screen.dart';
 import 'package:fit_dnu/feature/utilities/presentation/screens/intro_dnu_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -50,7 +51,9 @@ class _UtilScreenState extends State<UtilScreen> {
                     OptionBasic(
                       icon: Icons.newspaper,
                       title: 'Tin tức',
-                      onTap: () {},
+                      onTap: () {
+                        AppNavigator.push(context, DnuNewsScreen());
+                      },
                       color: Colors.blue,
                     ),
                     OptionBasic(

@@ -6,7 +6,6 @@ class ProfileMapper {
     return ProfileEntity(
       id: profile.id,
       studentCode: profile.studentCode,
-      userId: profile.userId,
       fullName: profile.fullName,
       birthDate: profile.birthDate,
       gender: profile.gender,

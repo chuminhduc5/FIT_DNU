@@ -1,151 +1,14 @@
-// import 'package:flutter/material.dart';
-//
-// class SignInScreen extends StatefulWidget {
-//   @override
-//   _SignInScreenState createState() => _SignInScreenState();
-// }
-//
-// class _SignInScreenState extends State<SignInScreen> {
-//   String dropdownValue = 'Sinh Viên';
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: Padding(
-//           padding: const EdgeInsets.symmetric(horizontal: 32.0),
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               // Logo Section
-//               Image.asset(
-//               "assets/images/dainam.jpg",
-//                 height: 100,
-//               ),
-//               SizedBox(height: 16),
-//               Text(
-//                 'Đăng nhập tài khoản',
-//                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-//               ),
-//               SizedBox(height: 32),
-//
-//               // Dropdown for User Type
-//               Container(
-//                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-//                 decoration: BoxDecoration(
-//                   border: Border.all(color: Colors.grey),
-//                   borderRadius: BorderRadius.circular(8),
-//                 ),
-//                 child: DropdownButtonHideUnderline(
-//                   child: DropdownButton<String>(
-//                     value: dropdownValue,
-//                     icon: Icon(Icons.arrow_drop_down),
-//                     onChanged: (String? newValue) {
-//                       setState(() {
-//                         dropdownValue = newValue!;
-//                       });
-//                     },
-//                     items: <String>['Sinh Viên', 'Giáo Viên', 'Quản Trị']
-//                         .map<DropdownMenuItem<String>>((String value) {
-//                       return DropdownMenuItem<String>(
-//                         value: value,
-//                         child: Row(
-//                           children: [
-//                             Icon(Icons.person),
-//                             SizedBox(width: 8),
-//                             Text(value),
-//                           ],
-//                         ),
-//                       );
-//                     }).toList(),
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(height: 16),
-//
-//               // Username Field
-//               TextField(
-//                 decoration: InputDecoration(
-//                   prefixIcon: Icon(Icons.account_circle),
-//                   labelText: 'Tài khoản',
-//                   border: OutlineInputBorder(
-//                     borderRadius: BorderRadius.circular(8),
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(height: 16),
-//
-//               // Password Field
-//               TextField(
-//                 obscureText: true,
-//                 decoration: InputDecoration(
-//                   prefixIcon: Icon(Icons.lock),
-//                   suffixIcon: Icon(Icons.visibility),
-//                   labelText: 'Mật khẩu',
-//                   border: OutlineInputBorder(
-//                     borderRadius: BorderRadius.circular(8),
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(height: 8),
-//
-//               // Forgot Password Link
-//               Align(
-//                 alignment: Alignment.centerLeft,
-//                 child: TextButton(
-//                   onPressed: () {
-//                     // Add forgot password logic here
-//                   },
-//                   child: Text(
-//                     'Quên mật khẩu sinh viên',
-//                     style: TextStyle(color: Colors.blue),
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(height: 16),
-//
-//               // Login and Home Buttons
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                 children: [
-//                   ElevatedButton(
-//                     onPressed: () {
-//                       // Add login logic here
-//                     },
-//                     child: Text('Đăng nhập'),
-//                     style: ElevatedButton.styleFrom(
-//                       backgroundColor: Colors.blue,
-//                       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-//                     ),
-//                   ),
-//                   ElevatedButton(
-//                     onPressed: () {
-//                       // Add navigation to home screen logic here
-//                     },
-//                     child: Text('Trang chủ'),
-//                     style: ElevatedButton.styleFrom(
-//                       backgroundColor: Colors.red,
-//                       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:fit_dnu/app_view.dart';
 import 'package:fit_dnu/core/common/helper/navigation/app_navigation.dart';
 import 'package:fit_dnu/core/config/theme/app_colors.dart';
+import 'package:fit_dnu/core/utils/message_util.dart';
+import 'package:fit_dnu/feature/authentication/data/models/sign_%E1%BB%89n_req_params.dart';
+import 'package:fit_dnu/feature/authentication/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fit_dnu/feature/authentication/presentation/widgets/button_auth_widget.dart';
 import 'package:fit_dnu/feature/authentication/presentation/widgets/text_field_auth_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -163,13 +26,27 @@ class _SignInScreenState extends State<SignInScreen>
   IconData iconPassword = CupertinoIcons.eye_slash;
   bool isCheckAccountPassword = false;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
   void _onSignInSuccess() async {
-    // if (socketService.socket == null || !socketService.socket!.connected) {
-    //   socketService.connectToSocket(username, employeeId);
-    // }
+    print('Đã bấm nút');
     final username = _usernameController.text;
     final password = _passwordController.text;
-    if (_formKey.currentState!.validate()) {}
+    if (_formKey.currentState!.validate()) {
+      print('Đã đưuọc kích hoạt');
+      context.read<AuthBloc>().add(
+        AuthSignInRequest(
+          params: SignInReqParams(
+            username: username,
+            password: password,
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -181,51 +58,72 @@ class _SignInScreenState extends State<SignInScreen>
 
   @override
   Widget build(BuildContext context) {
-    final maxScreenHeight = MediaQuery.of(context).size.height;
-    final maxScreenWidth = MediaQuery.of(context).size.width;
+    final maxScreenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
+    final maxScreenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
     final isLandscape = maxScreenWidth > maxScreenHeight;
 
     return Scaffold(
       backgroundColor: const Color(0xFFEFEFEF),
-      body: SafeArea(
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          padding: const EdgeInsets.all(15),
-          child: isLandscape
-              ? Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.only(top: maxScreenHeight * 0.1),
-                        child: Image.asset(
-                          "assets/images/dainam.jpg",
-                          width: 400,
-                          height: 400,
-                        ),
-                      ),
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) async {
+          if (state is AuthFailed) {
+            MessageUtils.errorMessageUtils(context,
+                message: 'Đăng nhập thất bại');
+            // setState(() {
+            //   isCheckAccountPassword = true;
+            // });
+          } else if (state is AuthSuccess) {
+            AppNavigator.pushAndRemove(context, AppView());
+            MessageUtils.successMessageUtils(context,
+                message: 'Đăng nhập thành công');
+          }
+        },
+        child: SafeArea(
+          child: Container(
+            height: double.infinity,
+            width: double.infinity,
+            padding: const EdgeInsets.all(15),
+            child: isLandscape
+                ? Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(top: maxScreenHeight * 0.1),
+                    child: Image.asset(
+                      "assets/images/dainam.jpg",
+                      width: 400,
+                      height: 400,
                     ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: buildForm(),
-                      ),
-                    ),
-                  ],
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
-                        child: Image.asset(
-                          "assets/images/dainam.jpg",
-                          width: 300,
-                          height: 300,
-                        ),
-                      ),
-                      buildForm(),
-                    ],
                   ),
                 ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: buildForm(),
+                  ),
+                ),
+              ],
+            )
+                : SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    child: Image.asset(
+                      "assets/images/dainam.jpg",
+                      width: 300,
+                      height: 300,
+                    ),
+                  ),
+                  buildForm(),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -239,32 +137,21 @@ class _SignInScreenState extends State<SignInScreen>
         constraints: const BoxConstraints(
           maxWidth: 600,
         ),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: const [
-            BoxShadow(
-              blurRadius: 4,
-              color: Color(0x33000000),
-              offset: Offset(0, 2),
-            ),
-          ],
-          borderRadius: BorderRadius.circular(12),
-        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Chào mừng bạn đến với Đại học Đại Nam',
+                'Chào mừng trở lại!',
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 22),
                 textAlign: TextAlign.center,
               ),
               const Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 24),
                 child: Text(
-                  'Vui lòng nhập tài khoản của bạn để đăng nhập',
+                  'Xin hãy đăng nhập vào tài khoản của bạn',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -274,7 +161,10 @@ class _SignInScreenState extends State<SignInScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
                       child: TextFieldAuthWidget(
                         controller: _usernameController,
                         hinText: 'Tài khoản',
@@ -292,7 +182,10 @@ class _SignInScreenState extends State<SignInScreen>
                     ),
                     const SizedBox(height: 25),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
                       child: TextFieldAuthWidget(
                         controller: _passwordController,
                         hinText: 'Mật khẩu',
@@ -319,17 +212,62 @@ class _SignInScreenState extends State<SignInScreen>
                         ),
                       ),
                     ),
-                    if (isCheckAccountPassword) ...[
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      const Text(
-                        'Tài khoản hoặc mật khẩu của bạn chưa chính xác!',
-                        style: TextStyle(color: AppColors.textRed),
-                      ),
-                    ],
+                    // if (isCheckAccountPassword) ...[
+                    //   const SizedBox(
+                    //     height: 8,
+                    //   ),
+                    //   const Text(
+                    //     'Tài khoản hoặc mật khẩu của bạn chưa chính xác!',
+                    //     style: TextStyle(color: AppColors.textRed),
+                    //   ),
+                    // ],
                     const SizedBox(height: 25),
                     _signInButton(context),
+                    const SizedBox(height: 20),
+                    const Row(
+                      children: [
+                        Expanded(child: Divider()),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text('Or'),
+                        ),
+                        Expanded(child: Divider()),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Social login buttons
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.facebook,
+                            color: Colors.blue,
+                            size: 30,
+                          ),
+                          onPressed: () {},
+                        ),
+                        const SizedBox(width: 20),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.mail,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                          onPressed: () {},
+                        ),
+                        const SizedBox(width: 20),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.apple,
+                            color: Colors.black,
+                            size: 30,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -341,10 +279,23 @@ class _SignInScreenState extends State<SignInScreen>
   }
 
   Widget _signInButton(BuildContext context) {
-    return ButtonAuthWidget(
-        textButton: 'Đăng nhập',
-        onPressed: () {
-          AppNavigator.pushAndRemove(context, const AppView());
-        });
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthLoading) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.red,
+            ),
+          );
+        }
+        return ButtonAuthWidget(
+          textButton: 'Đăng nhập',
+          onPressed: _onSignInSuccess,
+          // onPressed: () {
+          //   AppNavigator.pushAndRemove(context, AppView());
+          // },
+        );
+      },
+    );
   }
 }

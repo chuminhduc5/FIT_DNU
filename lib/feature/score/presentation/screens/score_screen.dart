@@ -1,4 +1,186 @@
+// import 'package:fit_dnu/core/config/theme/app_colors.dart';
+// import 'package:fit_dnu/feature/score/presentation/blocs/grade_cubit/grade_cubit.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+//
+// class ScoreScreen extends StatefulWidget {
+//   const ScoreScreen({Key? key}) : super(key: key);
+//
+//   @override
+//   State<ScoreScreen> createState() => _ScoreScreenState();
+// }
+//
+// class _ScoreScreenState extends State<ScoreScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         backgroundColor: AppColors.bgWhite,
+//         body: BlocProvider(
+//           create: (context) => GradeCubit()..getGrade(),
+//           child: BlocBuilder<GradeCubit, GradeState>(
+//             builder: (context, state) {
+//               if (state is GradeLoading) {
+//                 return const Center(
+//                   child: CircularProgressIndicator(
+//                     color: AppColors.bgRed,
+//                   ),
+//                 );
+//               } else if (state is GradeSuccess) {
+//                 return SingleChildScrollView(
+//                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Padding(
+//                         padding: const EdgeInsets.all(10.0),
+//                         child: Container(
+//                           padding: const EdgeInsets.all(10.0),
+//                           decoration: BoxDecoration(
+//                             color: Colors.white,
+//                             borderRadius: BorderRadius.circular(8.0),
+//                             boxShadow: [
+//                               BoxShadow(
+//                                 color: Colors.grey.withOpacity(0.3),
+//                                 spreadRadius: 2,
+//                                 blurRadius: 5,
+//                               ),
+//                             ],
+//                           ),
+//                           child: const Column(
+//                             crossAxisAlignment: CrossAxisAlignment.start,
+//                             children: [
+//                               Text(
+//                                 'Kỳ học: Học kỳ 2 - Năm 2020',
+//                                 style: TextStyle(
+//                                     fontSize: 16, fontWeight: FontWeight.bold),
+//                               ),
+//                               SizedBox(height: 8),
+//                               Row(
+//                                 mainAxisAlignment:
+//                                     MainAxisAlignment.spaceBetween,
+//                                 children: [
+//                                   Text('Số TC: 17',
+//                                       style: TextStyle(color: Colors.red)),
+//                                   Text('Điểm tổng kết: 0',
+//                                       style: TextStyle(color: Colors.red)),
+//                                   Text('Điểm GPA: Trống',
+//                                       style: TextStyle(color: Colors.red)),
+//                                 ],
+//                               ),
+//                               SizedBox(height: 4),
+//                               Row(
+//                                 mainAxisAlignment:
+//                                     MainAxisAlignment.spaceBetween,
+//                                 children: [
+//                                   Text('Số TC hoàn thành: 17',
+//                                       style: TextStyle(color: Colors.red)),
+//                                   Text('TC chưa đạt: 0',
+//                                       style: TextStyle(color: Colors.red)),
+//                                 ],
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 16),
+//                       // Data Table Section
+//                       LayoutBuilder(
+//                         builder:
+//                             (BuildContext context, BoxConstraints constraints) {
+//                           return SingleChildScrollView(
+//                             scrollDirection: Axis.horizontal,
+//                             // Allow horizontal scrolling
+//                             child: DataTable(
+//                               columnSpacing: constraints.maxWidth * 0.03,
+//                               headingRowColor: WidgetStateProperty.all<Color>(
+//                                   AppColors.bgRed),
+//                               headingTextStyle: const TextStyle(
+//                                 fontWeight: FontWeight.bold,
+//                                 color: Colors.white,
+//                               ),
+//                               columns: const [
+//                                 DataColumn(
+//                                   label: Text(
+//                                     'STT',
+//                                     style:
+//                                         TextStyle(fontWeight: FontWeight.bold),
+//                                   ),
+//                                 ),
+//                                 DataColumn(
+//                                   label: Text(
+//                                     'Tên học phần',
+//                                     style:
+//                                         TextStyle(fontWeight: FontWeight.bold),
+//                                   ),
+//                                 ),
+//                                 DataColumn(
+//                                   label: Text(
+//                                     'Số tín chỉ',
+//                                     style:
+//                                         TextStyle(fontWeight: FontWeight.bold),
+//                                   ),
+//                                 ),
+//                                 DataColumn(
+//                                   label: Text(
+//                                     'Tổng kết',
+//                                     style:
+//                                         TextStyle(fontWeight: FontWeight.bold),
+//                                   ),
+//                                 ),
+//                               ],
+//                               rows: state.grades.asMap().entries.map((entry) {
+//                                 final index = entry.key + 1;
+//                                 final course = entry.value;
+//                                 return _buildDataRow(
+//                                   index.toString(),
+//                                   course.courseName,
+//                                   course.credits.toString(),
+//                                   '', // Replace 'N/A' with actual grade if available
+//                                 );
+//                               }).toList(),
+//                             ),
+//                           );
+//                         },
+//                       ),
+//                     ],
+//                   ),
+//                 );
+//               } else if (state is GradeFailed) {
+//                 return const Center(
+//                   child: Text(
+//                     "Lấy thông tin môn học thất bại",
+//                     style: TextStyle(color: AppColors.black),
+//                   ),
+//                 );
+//               } else {
+//                 return const Center(
+//                   child: Text(
+//                     "Lỗi mạng",
+//                     style: TextStyle(color: AppColors.black),
+//                   ),
+//                 );
+//               }
+//             },
+//           ),
+//         ));
+//   }
+//
+//   DataRow _buildDataRow(
+//       String stt, String courseName, String credits, String grade) {
+//     return DataRow(
+//       cells: [
+//         DataCell(Text(stt)),
+//         DataCell(Text(courseName)),
+//         DataCell(Text(credits)),
+//         DataCell(Text(grade)),
+//       ],
+//     );
+//   }
+// }
+
+import 'package:fit_dnu/core/config/theme/app_colors.dart';
+import 'package:fit_dnu/feature/score/presentation/blocs/grade_cubit/grade_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScoreScreen extends StatefulWidget {
   const ScoreScreen({Key? key}) : super(key: key);
@@ -10,163 +192,161 @@ class ScoreScreen extends StatefulWidget {
 class _ScoreScreenState extends State<ScoreScreen> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text('Kết quả học tập'),
-          backgroundColor: Color(0xFFEE7C60),
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(24),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildOverviewCard(),
-                  _buildSemesterResultCard(),
-                  _buildSubjectDetailCard(),
-                  ElevatedButton(
-                    onPressed: () {
-                      print('Xem báo cáo chi tiết');
-                    },
-                    child: Text('Xem báo cáo chi tiết'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFEE7C60), // Button color
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      textStyle: TextStyle(fontSize: 16),
+    return Scaffold(
+      backgroundColor: AppColors.bgWhite,
+      body: BlocProvider(
+        create: (context) => GradeCubit()..getGrade(),
+        child: BlocBuilder<GradeCubit, GradeState>(
+          builder: (context, state) {
+            if (state is GradeLoading) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.bgRed,
+                ),
+              );
+            } else if (state is GradeSuccess) {
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                            ),
+                          ],
+                        ),
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Kỳ học: Học kỳ 2 - Năm 2020',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Số TC: 17',
+                                    style: TextStyle(color: Colors.red)),
+                                Text('Điểm tổng kết: 0',
+                                    style: TextStyle(color: Colors.red)),
+                                Text('Điểm GPA: Trống',
+                                    style: TextStyle(color: Colors.red)),
+                              ],
+                            ),
+                            SizedBox(height: 4),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Số TC hoàn thành: 17',
+                                    style: TextStyle(color: Colors.red)),
+                                Text('TC chưa đạt: 0',
+                                    style: TextStyle(color: Colors.red)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+                    const SizedBox(height: 16),
+                    // Data Table Section
+                    LayoutBuilder(
+                      builder:
+                          (BuildContext context, BoxConstraints constraints) {
+                        return SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          // Allow horizontal scrolling
+                          child: DataTable(
+                            columnSpacing: constraints.maxWidth * 0.03,
+                            headingRowColor: MaterialStateProperty.all<Color>(
+                                AppColors.bgRed),
+                            headingTextStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                            columns: const [
+                              DataColumn(
+                                label: Text(
+                                  'STT',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Tên học phần',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Điểm loại',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Điểm',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                            rows: state.grades.asMap().entries.map((entry) {
+                              final index = entry.key + 1;
+                              final course = entry.value;
+                              return _buildDataRow(
+                                index.toString(),
+                                course.courseName,
+                                course.gradeTypeName,
+                                course.gradeValue.toString(),
+                              );
+                            }).toList(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              );
+            } else if (state is GradeFailed) {
+              return const Center(
+                child: Text(
+                  "Lấy thông tin môn học thất bại",
+                  style: TextStyle(color: AppColors.black),
+                ),
+              );
+            } else {
+              return const Center(
+                child: Text(
+                  "Lỗi mạng",
+                  style: TextStyle(color: AppColors.black),
+                ),
+              );
+            }
+          },
         ),
       ),
     );
   }
 
-  Widget _buildOverviewCard() {
-    return Card(
-      margin: EdgeInsets.only(bottom: 16),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Tổng quan',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildGPAInfo(),
-                _buildCreditsInfo(),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildGPAInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('GPA', style: TextStyle(color: Colors.blue, fontSize: 18)),
-        Text('3.75', style: TextStyle(fontSize: 24)),
+  DataRow _buildDataRow(
+      String stt, String courseName, String gradeType, String grade) {
+    return DataRow(
+      cells: [
+        DataCell(Text(stt)),
+        DataCell(Text(courseName)),
+        DataCell(Text(gradeType)),
+        DataCell(Text(grade)),
       ],
-    );
-  }
-
-  Widget _buildCreditsInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Tín chỉ đã hoàn thành',
-            style: TextStyle(color: Colors.grey, fontSize: 16)),
-        Text('75/150', style: TextStyle(fontSize: 24)),
-      ],
-    );
-  }
-
-  Widget _buildSemesterResultCard() {
-    return Card(
-      margin: EdgeInsets.only(bottom: 16),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Kết quả học kỳ gần nhất',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            SizedBox(height: 16),
-            _buildSemesterRow('Học kỳ:', 'Học kỳ 1, 2023-2024'),
-            _buildSemesterRow('GPA học kỳ:', '3.80'),
-            _buildSemesterRow('Số tín chỉ đạt:', '18/18'),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSemesterRow(String title, String value) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title, style: TextStyle(color: Colors.grey)),
-        Text(value),
-      ],
-    );
-  }
-
-  Widget _buildSubjectDetailCard() {
-    return Card(
-      margin: EdgeInsets.only(bottom: 24),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Chi tiết môn học',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            SizedBox(height: 16),
-            _buildSubjectRow('Lập trình Web', '3 tín chỉ', 'A'),
-            _buildSubjectRow('Cơ sở dữ liệu', '4 tín chỉ', 'A+'),
-            _buildSubjectRow('Trí tuệ nhân tạo', '3 tín chỉ', 'B+'),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSubjectRow(String subject, String credits, String grade) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 12),
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(subject, style: TextStyle(fontSize: 16)),
-              Text(credits, style: TextStyle(color: Colors.grey)),
-            ],
-          ),
-          Text(grade, style: TextStyle(color: Colors.blue, fontSize: 18)),
-        ],
-      ),
     );
   }
 }

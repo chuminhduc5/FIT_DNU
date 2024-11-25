@@ -1,7 +1,6 @@
 class ProfileModel {
   int id;
   String studentCode;
-  int userId;
   String fullName;
   DateTime birthDate;
   String gender;
@@ -15,7 +14,6 @@ class ProfileModel {
   ProfileModel({
     required this.id,
     required this.studentCode,
-    required this.userId,
     required this.fullName,
     required this.birthDate,
     required this.gender,
@@ -29,19 +27,25 @@ class ProfileModel {
 
   // Chuyển đổi từ JSON sang đối tượng ProfileModel
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
+    print('Dữ liệu JSON nhận được: $json'); // Log dữ liệu JSON
     return ProfileModel(
-      id: json['id'],
-      studentCode: json['studentCode'],
-      userId: json['userId'],
-      fullName: json['fullName'],
-      birthDate: DateTime.parse(json['birthDate']),
-      gender: json['gender'],
-      nationality: json['nationality'],
-      hometown: json['hometown'],
-      address: json['address'],
-      phoneNumber: json['phoneNumber'],
-      email: json['email'],
-      major: json['major'],
+      id: json['id'] != null
+          ? (json['id'] is int
+              ? json['id']
+              : int.tryParse(json['id'].toString()) ?? 0)
+          : 0,
+      studentCode: json['studentCode'] ?? '',
+      fullName: json['fullName'] ?? '',
+      birthDate: json['birthDate'] != null
+          ? DateTime.tryParse(json['birthDate']) ?? DateTime(1900, 1, 1)
+          : DateTime(2024, 1, 1),
+      gender: json['gender'] ?? '',
+      nationality: json['nationality'] ?? '',
+      hometown: json['hometown'] ?? '',
+      address: json['address'] ?? '',
+      phoneNumber: json['phoneNumber'] ?? '',
+      email: json['email'] ?? '',
+      major: json['major'] ?? '',
     );
   }
 }

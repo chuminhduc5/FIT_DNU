@@ -1,5 +1,5 @@
 import 'package:fit_dnu/core/config/theme/app_colors.dart';
-import 'package:fit_dnu/feature/home/widgets/feature_checkbox_widget.dart';
+import 'package:fit_dnu/feature/home/presentation/widgets/feature_checkbox_widget.dart';
 import 'package:flutter/material.dart';
 
 class FeatureScreen extends StatefulWidget {

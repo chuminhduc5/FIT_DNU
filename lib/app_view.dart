@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:fit_dnu/feature/home/presentation/screens/home_screen.dart';
+import 'package:fit_dnu/feature/score/presentation/screens/learning_corner_screen.dart';
 import 'package:fit_dnu/feature/utilities/presentation/screens/util_screen.dart';
 import 'package:fit_dnu/feature/notification/presentation/screens/notification_screen.dart';
 import 'package:fit_dnu/feature/profile/presentation/screens/profile_screen.dart';
@@ -98,34 +99,17 @@ class AppView extends StatefulWidget {
 class _AppViewState extends State<AppView> {
   int _currentIndex = 0;
 
-  // Tạo danh sách màn hình với HomeScreen nhận callback onTap
-  // List<Widget> _screens = [
-  //   HomeScreen(
-  //     onTap: () {
-  //       // Khi nhấn vào HomeScreen, cập nhật _currentIndex
-  //       setState(() {
-  //         _currentIndex = 4; // Chuyển tới màn hình Profile
-  //       });
-  //     },
-  //   ),
-  //   const NotificationScreen(),
-  //   const ScoreScreen(),
-  //   const UtilScreen(),
-  //   const ProfileScreen(),
-  // ];
-
   List<Widget> _getScreens() {
     return [
       HomeScreen(
         onTap: () {
-          // This is safe now because it's inside the build method where setState can be accessed
           setState(() {
-            _currentIndex = 4; // Navigate to Profile screen
+            _currentIndex = 4;
           });
         },
       ),
       const NotificationScreen(),
-      const ScoreScreen(),
+      const LearningCornerScreen(),
       const UtilScreen(),
       const ProfileScreen(),
     ];

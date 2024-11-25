@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 class ProfileEntity extends Equatable {
   final int id;
   final String studentCode;
-  final int userId;
   final String fullName;
   final DateTime birthDate;
   final String gender;
@@ -17,7 +16,6 @@ class ProfileEntity extends Equatable {
   ProfileEntity({
     required this.id,
     required this.studentCode,
-    required this.userId,
     required this.fullName,
     required this.birthDate,
     required this.gender,
@@ -31,17 +29,16 @@ class ProfileEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    studentCode,
-    userId,
-    fullName,
-    birthDate,
-    gender,
-    nationality,
-    hometown,
-    address,
-    phoneNumber,
-    email,
-    major,
-  ];
+        id,
+        studentCode,
+        fullName,
+        birthDate,
+        gender,
+        nationality,
+        hometown,
+        address,
+        phoneNumber,
+        email,
+        major,
+      ];
 }

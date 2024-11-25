@@ -1,5 +1,8 @@
+import 'package:fit_dnu/core/common/helper/navigation/app_navigation.dart';
 import 'package:fit_dnu/core/common/widgets/option/option_basic.dart';
 import 'package:fit_dnu/core/config/theme/app_colors.dart';
+import 'package:fit_dnu/feature/utilities/presentation/screens/dnu_news_screen.dart';
+import 'package:fit_dnu/feature/utilities/presentation/screens/intro_dnu_screen.dart';
 import 'package:flutter/material.dart';
 
 class UtilScreen extends StatefulWidget {
@@ -46,25 +49,29 @@ class _UtilScreenState extends State<UtilScreen> {
                   shrinkWrap: true,
                   children: [
                     OptionBasic(
-                      icon: Icons.person,
+                      icon: Icons.newspaper,
                       title: 'Tin tức',
-                      onTap: () {},
+                      onTap: () {
+                        AppNavigator.push(context, DnuNewsScreen());
+                      },
                       color: Colors.blue,
                     ),
                     OptionBasic(
-                      icon: Icons.calendar_today,
+                      icon: Icons.school,
                       title: 'Giới thiệu về DNU',
-                      onTap: () {},
+                      onTap: () {
+                        AppNavigator.push(context, IntroDnuScreen());
+                      },
                       color: Colors.red,
                     ),
                     OptionBasic(
-                      icon: Icons.feedback,
+                      icon: Icons.menu_book_rounded,
                       title: 'Văn bản hướng dẫn',
                       onTap: () {},
                       color: Colors.orange,
                     ),
                     OptionBasic(
-                      icon: Icons.fingerprint,
+                      icon: Icons.design_services_outlined,
                       title: 'Dịch vụ một cửa',
                       onTap: () {},
                       color: Colors.green,

@@ -13,7 +13,7 @@ class ResultScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: AppColors.bgColor,
           appBar: AppBar(
-            backgroundColor: AppColors.bgAppbar,
+            backgroundColor: AppColors.bgOrange,
             title: const Text(
               'Góc học tập',
               style: TextStyle(
@@ -51,7 +51,7 @@ class ResultScreen extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     LearningResultScreen(),
-                    //ScoreScreen(),
+                    ScoreScreen(),
                   ],
                 ),
               ),

@@ -120,7 +120,7 @@ class _UtilScreenState extends State<UtilScreen> {
                       color: Colors.blue,
                     ),
                     OptionBasic(
-                      icon: Icons.fingerprint,
+                      icon: Icons.qr_code_2,
                       title: 'Quét mã QR',
                       onTap: () {},
                       color: Colors.green,
